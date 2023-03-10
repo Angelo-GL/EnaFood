@@ -39,9 +39,10 @@ const saveOrUpdate = async (req, res) => {
 }
 
 const findAllProduct = async (req, res) => {
-    const { page = 0, size = 5 } = req.query
+    const { page = 1, size = 5 } = req.query
     
-        
+    if(page == 0 ) return res.status(400).json({message: "Página inválida!"})
+
     try {
         let skip = size * (page - 1)
         const list = await Product.find({}).skip(skip).limit(size).exec()
@@ -52,4 +53,4 @@ const findAllProduct = async (req, res) => {
     
 }
 
-module.exports = { saveOrUpdate }
+module.exports = { saveOrUpdate, findAllProduct }
