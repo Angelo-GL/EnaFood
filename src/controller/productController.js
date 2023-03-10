@@ -32,11 +32,24 @@ const saveOrUpdate = async (req, res) => {
             await Product.create(product)
             res.status(200).json({ message: "Cadastro concluido!" })
         }
-        
+
     } catch (error) {
         res.status(500).send(error)
     }
+}
 
+const findAllProduct = async (req, res) => {
+    const { page = 0, size = 5 } = req.query
+    
+        
+    try {
+        let skip = size * (page - 1)
+        const list = await Product.find({}).skip(skip).limit(size).exec()
+        res.status(200).json(list)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+    
 }
 
 module.exports = { saveOrUpdate }

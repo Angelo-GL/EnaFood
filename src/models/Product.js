@@ -15,11 +15,11 @@ const productSchema = new Schema({
         required:true
     },
     image: {
-        typeof: String,
+        type: String,
         required:true
     },
     avaliable: {
-        typeof: Boolean,
+        type: Boolean,
         default: true,
     },
 }, { timestamps: true} )
