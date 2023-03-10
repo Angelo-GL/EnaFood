@@ -41,7 +41,7 @@ const saveOrUpdate = async (req, res) => {
 const findAllProduct = async (req, res) => {
     const { page = 1, size = 5 } = req.query
     
-    if(page == 0 ) return res.status(400).json({message: "Página inválida!"})
+    if(page <= 0 ) return res.status(400).json({message: "Página inválida!"})
 
     try {
         let skip = size * (page - 1)
