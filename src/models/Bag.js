@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose")
-const { productSchema } = require('Product')
+const { productSchema } = require('./product')
 
 const bagSchema = new Schema({ 
     productItens: [{
