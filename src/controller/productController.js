@@ -3,7 +3,6 @@ const { Product } = require('../models/product')
 
 const saveOrUpdate = async (req, res) => {
     const product = { ...req.body }
-
     if(req.params.id) product.id = req.params.id
 
     try {
@@ -18,14 +17,14 @@ const saveOrUpdate = async (req, res) => {
     }
 
     try {
-
-        if(product.id) {
-            const response = await Product.findById(product.id).exec()
+        
+        if(product._id) {
+            const response = await Product.findById(product._id).exec()
 
             if (!response) {
-                return res.status(401).json({ message: "Nenhum Produto encontrado!" })
+                return res.status(422).json({ message: "Nenhum Produto encontrado!" })
             } else {
-                const postUpdate = await Product.update({ _Id: ObjectId(product.id), product})
+                const postUpdate = await Product.updateOne({ _id: product._id }, product)
                 res.status(200).json({ message: "Atualização concluida!" })
             }
         } else {
@@ -49,8 +48,22 @@ const findAllProduct = async (req, res) => {
         res.status(200).json(list)
     } catch (error) {
         res.status(400).json(error)
-    }
-    
+    }   
 }
 
-module.exports = { saveOrUpdate, findAllProduct }
+const findId = async (req, res) => {
+try {
+
+    const response = await Product.findById(req.params.id).exec()
+    if(response) {
+        return res.status(200).json(response)
+    }
+
+    res.status(422).json({ message: "Produto não Encontrado" })
+} catch (error) {
+    res.status(400).json(error)
+}
+   
+}
+
+module.exports = { saveOrUpdate, findAllProduct, findId }
