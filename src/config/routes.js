@@ -12,6 +12,7 @@ router.put('/products', productController.saveOrUpdate)
 router.get('/products/:id', productController.findId)
 router.delete('/products/:id', productController.deleteProduct)
 router.post('/bag', bagController.save)
+router.get('/bag', bagController.findAllBag )
 
 
 module.exports = router
