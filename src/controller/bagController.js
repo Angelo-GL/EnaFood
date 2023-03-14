@@ -58,8 +58,33 @@ const findAllBag = async (req, res) => {
 }
 
 
+const findByIdBag = async (req, res) => {
+    try {
+        const response = await Bag.findById(req.params.id).exec()
+        if (response) {
+            return res.status(200).json(response)
+        }
 
+        res.status(422).json({ message: "Sacola não Encontrado" })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
 
+const deleteBag = async (req, res) => {
+    const id = req.params.id
 
+    try {
+        const responseDB = await Bag.findOne({ _id: id })
 
-module.exports = { save, findAllBag }
+        if(!responseDB) return res.status(422).json({ message: "Sacola não encontrado! " })
+
+        await Bag.deleteOne({_id: id})
+        res.status(200).json({ message: "Sacola Excluido!" })
+
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+module.exports = { save, findAllBag, findByIdBag, deleteBag }

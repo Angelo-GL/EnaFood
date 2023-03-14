@@ -13,6 +13,8 @@ router.get('/products/:id', productController.findId)
 router.delete('/products/:id', productController.deleteProduct)
 router.post('/bag', bagController.save)
 router.get('/bag', bagController.findAllBag )
+router.delete('/bag/:id', bagController.deleteBag)
+router.get('/bag/:id', bagController.findByIdBag)
 
 
 module.exports = router
