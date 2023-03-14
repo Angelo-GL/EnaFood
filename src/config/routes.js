@@ -15,6 +15,7 @@ router.post('/bag', bagController.save)
 router.get('/bag', bagController.findAllBag )
 router.delete('/bag/:id', bagController.deleteBag)
 router.get('/bag/:id', bagController.findByIdBag)
+router.put('/bag/:id', bagController.UpdateBag)
 
 
 module.exports = router

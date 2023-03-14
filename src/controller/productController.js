@@ -3,7 +3,7 @@ const { Product } = require('../models/product')
 
 const saveOrUpdate = async (req, res) => {
     const product = { ...req.body }
-    if (req.params.id) product.id = req.params.id
+    if (req.params.id) product._id = req.params.id
 
     try {
         existsOrError(product.name, "[Err] Nome do produto não informado!")
