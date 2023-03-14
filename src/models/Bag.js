@@ -1,4 +1,6 @@
-const { Schema, model } = require("mongoose")
+
+const mongoose = require('mongoose')
+const { Schema } = mongoose
 const { productSchema } = require('./product')
 
 const bagSchema = new Schema({ 
@@ -8,7 +10,7 @@ const bagSchema = new Schema({
             default: 0
         },
         products: {
-            type: schemaProduct,
+            type: productSchema,
         } 
     }],
     priceTotal: {
@@ -17,6 +19,6 @@ const bagSchema = new Schema({
     }
 }, { timestamps: true} )
 
-const Bag = model("Bag", bagSchema)
+const Bag = mongoose.model("Bag", bagSchema)
 
 module.exports = Bag
